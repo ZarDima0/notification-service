@@ -1,4 +1,4 @@
-.PHONY: clear migrate
+.PHONY: clear migrate test
 clear:
 	docker compose exec app php artisan optimize:clear
 	docker compose restart worker
@@ -15,3 +15,6 @@ setup:
 	docker compose exec app php artisan migrate
 	docker compose exec app php artisan optimize:clear
 	@echo "✅ Готово! Сервис доступен на http://localhost:8000"
+
+test:
+	docker-compose exec app php artisan test
