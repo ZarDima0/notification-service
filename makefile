@@ -8,6 +8,7 @@ migrate:
 
 setup:
 	cp backend/.env.example backend/.env
+	cp backend/.env.testing.example backend/.env.testing
 	docker compose up -d
 	sleep 5
 	docker compose exec app php artisan key:generate
@@ -15,6 +16,5 @@ setup:
 	docker compose exec app php artisan migrate
 	docker compose exec app php artisan optimize:clear
 	@echo "✅ Готово! Сервис доступен на http://localhost:8000"
-
 test:
 	docker-compose exec app php artisan test

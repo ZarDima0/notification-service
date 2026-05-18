@@ -19,7 +19,6 @@ class NotificationResource extends JsonResource
             'priority' => $this->priority,
             'sent_at' => $this->sent_at,
             'delivered_at' => $this->delivered_at,
-            'created_at' => $this->created_at,
         ];
     }
 }
