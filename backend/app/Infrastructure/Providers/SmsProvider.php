@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Providers;
@@ -22,8 +23,8 @@ class SmsProvider implements NotificationProviderInterface
                 'SMS provider unavailable'
             );
         }
-        logger()->info("Sending sms notification", [
-            "notification_id" => $notification->id,
+        logger()->info('Sending sms notification', [
+            'notification_id' => $notification->id,
         ]);
     }
 

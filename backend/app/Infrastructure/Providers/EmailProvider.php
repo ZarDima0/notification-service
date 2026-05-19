@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Providers;
@@ -22,8 +23,8 @@ class EmailProvider implements NotificationProviderInterface
                 'Email provider unavailable'
             );
         }
-        logger()->info("Sending email notification", [
-            "notification_id" => $notification->id,
+        logger()->info('Sending email notification', [
+            'notification_id' => $notification->id,
         ]);
     }
 

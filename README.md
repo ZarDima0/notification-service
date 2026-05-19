@@ -138,7 +138,6 @@ GET /api/notifications/recipient/{recipientId}?per_page=20
 | Статус | Описание |
 |---|---|
 | queued | Уведомление поставлено в очередь |
-| processing | В обработке |
 | sent | Отправлено |
 | delivered | Доставлено |
 | failed | Ошибка отправки |

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Notification\UseCase;
@@ -12,14 +13,12 @@ use Throwable;
 
 final readonly class SendNotificationUseCase
 {
-
     const OK_STATUS = 'OK';
+
     public function __construct(
         private NotificationRepositoryInterface $repository,
-        private NotificationProviderResolver    $resolver,
-    )
-    {
-    }
+        private NotificationProviderResolver $resolver,
+    ) {}
 
     /**
      * @throws Throwable
@@ -27,7 +26,7 @@ final readonly class SendNotificationUseCase
     public function execute(string $notificationId): void
     {
         $notification = $this->repository->findNotificationById($notificationId);
-        if (!$notification) {
+        if (! $notification) {
             return;
         }
         if ($notification->status == NotificationStatus::DELIVERED->value) {
@@ -40,7 +39,7 @@ final readonly class SendNotificationUseCase
             to: NotificationStatus::SENT->value
         );
 
-        if (!$acquired) {
+        if (! $acquired) {
             return;
         }
 

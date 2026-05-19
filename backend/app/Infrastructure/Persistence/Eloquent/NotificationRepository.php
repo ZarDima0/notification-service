@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Eloquent;
@@ -12,7 +13,6 @@ use App\Infrastructure\Persistence\Eloquent\Models\NotificationBatchModel;
 use App\Infrastructure\Persistence\Eloquent\Models\NotificationModel;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -20,10 +20,7 @@ readonly class NotificationRepository implements NotificationRepositoryInterface
 {
     public function __construct(
         private IdempotencyRepositoryInterface $idempotency
-    )
-    {
-    }
-
+    ) {}
 
     public function findBatchByIdempotencyKey(string $key): ?string
     {
@@ -47,7 +44,7 @@ readonly class NotificationRepository implements NotificationRepositoryInterface
     {
         try {
             return DB::transaction(function () use ($dto) {
-                $batchId = (string)Str::uuid();
+                $batchId = (string) Str::uuid();
                 NotificationBatchModel::query()->create([
                     'id' => $batchId,
                     'channel' => $dto->channel,
@@ -58,7 +55,7 @@ readonly class NotificationRepository implements NotificationRepositoryInterface
                 ]);
                 $notificationIds = [];
                 foreach ($dto->recipients as $recipientId) {
-                    $notificationId = (string)Str::uuid();
+                    $notificationId = (string) Str::uuid();
                     NotificationModel::query()->create([
                         'id' => $notificationId,
                         'batch_id' => $batchId,
@@ -68,6 +65,7 @@ readonly class NotificationRepository implements NotificationRepositoryInterface
                     $notificationIds[] = $notificationId;
                 }
                 $this->idempotency->set($dto->idempotencyKey, $batchId);
+
                 return [
                     'batch_id' => $batchId,
                     'notification_ids' => $notificationIds,

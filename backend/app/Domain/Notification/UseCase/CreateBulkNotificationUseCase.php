@@ -1,7 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Notification\UseCase;
+
 use App\Domain\Notification\DTO\CreateBulkNotificationDTO;
 use App\Domain\Notification\Repository\NotificationRepositoryInterface;
 use App\Jobs\ProcessNotificationJob;
@@ -24,6 +26,7 @@ final readonly class CreateBulkNotificationUseCase
             ProcessNotificationJob::dispatch($notificationId)
                 ->onQueue($bulkNotificationDTO->priority->value);
         }
+
         return $result['batch_id'];
     }
 }

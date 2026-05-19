@@ -2,12 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Domain\Notification\DTO\CreateBulkNotificationDTO;
-use App\Domain\Notification\Enums\NotificationChannel;
-use App\Domain\Notification\Enums\Priority;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class RecipientHistoryRequest extends FormRequest
 {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Eloquent\Models;
@@ -34,10 +35,11 @@ class NotificationModel extends Model
 
     protected $casts = [
         'channel' => NotificationChannel::class,
-        'status'  => NotificationStatus::class,
+        'status' => NotificationStatus::class,
     ];
 
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     public function batch(): BelongsTo

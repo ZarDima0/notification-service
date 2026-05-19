@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Notification\UseCase;
@@ -8,9 +9,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 final readonly class GetRecipientNotificationsUseCase
 {
-    public function __construct(private NotificationRepositoryInterface $repository)
-    {
-    }
+    public function __construct(private NotificationRepositoryInterface $repository) {}
 
     public function execute(int $recipientId, int $perPage = 20): LengthAwarePaginator
     {

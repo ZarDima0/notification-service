@@ -11,11 +11,9 @@ use InvalidArgumentException;
 readonly class NotificationProviderResolver
 {
     public function __construct(
-        private SmsProvider   $smsProvider,
+        private SmsProvider $smsProvider,
         private EmailProvider $emailProvider,
-    )
-    {
-    }
+    ) {}
 
     public function resolve(NotificationChannel $channel): NotificationProviderInterface
     {

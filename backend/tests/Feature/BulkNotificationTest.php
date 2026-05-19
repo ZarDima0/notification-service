@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Feature;
@@ -241,7 +242,7 @@ class BulkNotificationTest extends TestCase
             SendNotificationUseCase::class
         );
 
-        $useCase->execute((string)$notification->id);
+        $useCase->execute((string) $notification->id);
 
         $this->assertDatabaseHas('notifications', [
             'id' => $notification->id,
