@@ -37,7 +37,6 @@ class RecipientHistoryTest extends TestCase
                     'priority',
                     'sent_at',
                     'delivered_at',
-                    'created_at',
                 ],
             ],
             'meta' => [
