@@ -24,17 +24,24 @@ services:
     depends_on:
       - app
 
-  worker:
+  worker_high:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    container_name: notification_worker
-    working_dir: /var/www
-    command: php artisan queue:work rabbitmq --queue=high,low --tries=5
+    command: php artisan queue:work rabbitmq --queue=high --sleep=0 --tries=3 --timeout=30
     volumes:
       - ./backend:/var/www
     depends_on:
-      - app
+      - rabbitmq
+      - redis
+  worker_low:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    command: php artisan queue:work rabbitmq --queue=low --sleep=3 --tries=5 --timeout=120
+    volumes:
+      - ./backend:/var/www
+    depends_on:
       - rabbitmq
       - redis
   postgres:
