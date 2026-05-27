@@ -16,7 +16,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-          extensions: none
+          extensions: mbstring, iconv
+          ini-file: production
       - name: Install dependencies
         working-directory: backend
         run: composer install --prefer-dist --no-interaction --no-progress
@@ -58,8 +59,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-          extensions: pdo_pgsql, redis
-          coverage: none
+          extensions: mbstring, iconv, pdo_pgsql, redis
+          ini-file: production
 
       - name: Install dependencies
         working-directory: backend
