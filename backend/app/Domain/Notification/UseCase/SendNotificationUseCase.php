@@ -39,7 +39,7 @@ final readonly class SendNotificationUseCase
             to: NotificationStatus::SENT->value
         );
 
-        if (! $acquired) {
+        if (!$acquired) {
             return;
         }
 
