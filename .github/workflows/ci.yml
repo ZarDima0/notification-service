@@ -11,12 +11,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.4
+          php-version: "8.4"
           extensions: mbstring, iconv
           ini-file: production
+
       - name: Install dependencies
         working-directory: backend
         run: composer install --prefer-dist --no-interaction --no-progress
@@ -46,6 +48,13 @@ jobs:
 
       redis:
         image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
       rabbitmq:
         image: rabbitmq:3-management
@@ -57,7 +66,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.4
+          php-version: "8.4"
           extensions: mbstring, iconv, pdo_pgsql, redis
           ini-file: production
 
@@ -81,6 +90,8 @@ jobs:
           DB_DATABASE: notifications_test
           DB_USERNAME: laravel
           DB_PASSWORD: testing
+          REDIS_HOST: 127.0.0.1
+          REDIS_PORT: 6379
         run: php artisan migrate --force
 
       - name: Run tests
@@ -93,4 +104,6 @@ jobs:
           DB_DATABASE: notifications_test
           DB_USERNAME: laravel
           DB_PASSWORD: testing
+          REDIS_HOST: 127.0.0.1
+          REDIS_PORT: 6379
         run: php artisan test
