@@ -13,7 +13,7 @@ use Throwable;
 
 final readonly class SendNotificationUseCase
 {
-    const OK_STATUS = 'OK';
+    const string OK_STATUS = 'OK';
 
     public function __construct(
         private NotificationRepositoryInterface $repository,
